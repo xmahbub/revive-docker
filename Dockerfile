@@ -16,7 +16,7 @@ RUN pwd
 # Set ServerName in Apache configuration
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-# Copy the entry script into the container
+# Copy the entry script into the containers`
 COPY entry-script.sh /usr/local/bin/entry-script.sh
 
 # Make the entry script executable
