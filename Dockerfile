@@ -40,5 +40,6 @@ RUN set -ex \
 	&& ln -sfT /dev/stdout "$APACHE_LOG_DIR/other_vhosts_access.log"
 
 RUN service apache2 restart
+
 EXPOSE 80
-EXPOSE 443
+CMD ["apache2-foreground"]
