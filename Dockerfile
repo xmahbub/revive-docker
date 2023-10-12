@@ -13,18 +13,17 @@ ADD ./src /var/www/html
 # Print the current working directory during the build
 RUN pwd
 
-# Change permissions on the /var/www/html/www/admin/plugins directory
-RUN chmod -R a+w /var/www/html/www/admin/plugins
-RUN chown -R www-data:www-data /var/www/html
-
 # Set ServerName in Apache configuration
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-# Restart Apache service
-RUN service apache2 restart
+# Copy the entry script into the container
+COPY entry-script.sh /usr/local/bin/entry-script.sh
+
+# Make the entry script executable
+RUN chmod +x /usr/local/bin/entry-script.sh
 
 # Expose port 80 for HTTP
 EXPOSE 80
 
-# Start Apache in the foreground
-CMD ["/usr/sbin/apache2ctl", "-DFOREGROUND"]
+# Define the entry point
+CMD ["/usr/local/bin/entry-script.sh"]
